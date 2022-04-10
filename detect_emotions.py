@@ -3,6 +3,7 @@ from my_utils import create_generators
 from deeplearning_model import deeplearning_model
 from keras.callbacks import EarlyStopping
 from keras.callbacks import ReduceLROnPlateau
+import os
 
 train_img_path = '/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python/images/train/angry/'
 # sample_images(train_img_path)
@@ -29,3 +30,27 @@ learning_rate = ReduceLROnPlateau(
     min_delta=0.001,
     verbose=1
 )
+
+model = deeplearning_model(7)
+model.compile(
+    optimizer='adam',
+    loss='categorical_crossentropy',
+    metrics=['accuracy']
+)
+
+model.fit(
+    train_generators,
+    batch_size=32,
+    epochs=2,
+    validation_data=test_generators,
+    callbacks=[early_stopping, learning_rate]
+)
+
+# Save Model in a h5 format
+
+if os.path.isfile(
+        '/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python//Model.h5'
+) is False:
+    model.save(
+        '/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python//Model.h5'
+    )
