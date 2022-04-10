@@ -5,8 +5,17 @@ from keras.callbacks import EarlyStopping
 from keras.callbacks import ReduceLROnPlateau
 import os
 
-train_img_path = '/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python/images/train/angry/'
-# sample_images(train_img_path)
+################
+# Switches
+Sample = False
+TRAIN = False
+SAVE = False
+################
+
+
+if Sample:
+    train_img_path = '/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python/images/train/angry/'
+    sample_images(train_img_path)
 
 train_generators, test_generators = create_generators(
     batch_size=32,
@@ -31,26 +40,27 @@ learning_rate = ReduceLROnPlateau(
     verbose=1
 )
 
-model = deeplearning_model(7)
-model.compile(
-    optimizer='adam',
-    loss='categorical_crossentropy',
-    metrics=['accuracy']
-)
-
-model.fit(
-    train_generators,
-    batch_size=32,
-    epochs=2,
-    validation_data=test_generators,
-    callbacks=[early_stopping, learning_rate]
-)
-
-# Save Model in a h5 format
-
-if os.path.isfile(
-        '/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python//Model.h5'
-) is False:
-    model.save(
-        '/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python//Model.h5'
+if TRAIN:
+    model = deeplearning_model(7)
+    model.compile(
+        optimizer='adam',
+        loss='categorical_crossentropy',
+        metrics=['accuracy']
     )
+
+    model.fit(
+        train_generators,
+        batch_size=32,
+        epochs=2,
+        validation_data=test_generators,
+        callbacks=[early_stopping, learning_rate]
+    )
+
+if SAVE:
+    # Save Model in a h5 format
+    if os.path.isfile(
+            '/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python//Model.h5'
+    ) is False:
+        model.save(
+            '/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python//Model.h5'
+        )
