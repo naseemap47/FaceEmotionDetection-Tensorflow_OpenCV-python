@@ -1,0 +1,45 @@
+import matplotlib.pyplot as plt
+from keras.preprocessing.image import load_img
+from keras.preprocessing.image import ImageDataGenerator
+import os
+
+
+def sample_images(img_folder_path):
+    # x = np.random.randint(10, size=1)
+    plt.figure(figsize=(5, 5))
+    for i in range(1, 10, 1):
+        plt.subplot(3, 3, i)
+        img = load_img(
+            img_folder_path + os.listdir(img_folder_path)[i],
+            target_size=(48, 48)
+        )
+        plt.imshow(img)
+        plt.tight_layout()
+        plt.axis('off')
+    plt.show()
+
+
+def create_generators(batch_size, path_to_train_data, path_to_val_data):
+    train_preprocessor = ImageDataGenerator(
+        rotation_range=10,
+        width_shift_range=0.1,
+        height_shift_range=0.1
+    )
+    val_preprocessor = ImageDataGenerator()
+    train_generators = train_preprocessor.flow_from_directory(
+        path_to_train_data,
+        target_size=(48, 48),
+        color_mode='grayscale',
+        class_mode='categorical',
+        batch_size=batch_size,
+        shuffle=True
+    )
+    val_generators = val_preprocessor.flow_from_directory(
+        path_to_val_data,
+        target_size=(48, 48),
+        color_mode='grayscale',
+        class_mode='categorical',
+        batch_size=batch_size,
+        shuffle=False
+    )
+    return train_generators, val_generators
