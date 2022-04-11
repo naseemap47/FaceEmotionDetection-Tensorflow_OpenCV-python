@@ -35,7 +35,11 @@ while True:
             prediction = model.predict(roi)[0]
             # print(prediction)
             predict_emotion = emotion_labels[prediction.argmax()]
-            # print(predict_emotion)
+            print(predict_emotion)
+            cv2.putText(
+                img, str(predict_emotion), (x+5, y-5),
+                cv2.FONT_HERSHEY_PLAIN, 2, (255, 0, 255), 2
+            )
 
     cv2.imshow("Image", img)
     cv2.waitKey(1)
