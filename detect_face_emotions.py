@@ -1,5 +1,7 @@
 import cv2
 from keras.models import load_model
+from keras.preprocessing.image import img_to_array
+import numpy as np
 
 cap = cv2.VideoCapture(0)
 
@@ -21,6 +23,19 @@ while True:
 
     for (x, y, w, h) in faces:
         cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
+        face_roi = gray[y:y+h, x:x+w]
+        face_roi = cv2.resize(face_roi, (48, 48), interpolation=cv2.INTER_AREA)
+        # print(len(face_roi))
+
+        if len(face_roi)!= 0:
+            roi = face_roi.astype('float32')/255
+            roi = img_to_array(roi)
+            roi = np.expand_dims(roi, axis=0)
+
+            prediction = model.predict(roi)[0]
+            # print(prediction)
+            predict_emotion = emotion_labels[prediction.argmax()]
+            # print(predict_emotion)
 
     cv2.imshow("Image", img)
     cv2.waitKey(1)
