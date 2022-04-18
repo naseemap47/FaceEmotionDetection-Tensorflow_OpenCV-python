@@ -8,8 +8,8 @@ import os
 ################
 # Switches
 Sample = False
-TRAIN = False
-SAVE = False
+TRAIN = True
+SAVE = True
 ################
 
 
@@ -51,7 +51,7 @@ if TRAIN:
     model.fit(
         train_generators,
         batch_size=32,
-        epochs=2,
+        epochs=10,
         validation_data=test_generators,
         callbacks=[early_stopping, learning_rate]
     )
