@@ -51,9 +51,12 @@ if TRAIN:
     model.fit(
         train_generators,
         batch_size=32,
-        epochs=10,
+        epochs=50,
         validation_data=test_generators,
-        callbacks=[early_stopping, learning_rate]
+        callbacks=[
+            early_stopping,
+            # learning_rate
+        ]
     )
 
 if SAVE:
