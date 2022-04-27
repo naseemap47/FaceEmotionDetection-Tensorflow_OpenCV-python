@@ -36,7 +36,7 @@ learning_rate = ReduceLROnPlateau(
     monitor='val_loss',
     factor=0.2,
     patience=3,
-    min_delta=0.001,
+    min_delta=0.0001,
     verbose=1
 )
 
@@ -55,7 +55,7 @@ if TRAIN:
         validation_data=test_generators,
         callbacks=[
             early_stopping,
-            # learning_rate
+            learning_rate
         ]
     )
 
