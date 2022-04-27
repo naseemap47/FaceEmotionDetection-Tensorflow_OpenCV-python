@@ -36,7 +36,7 @@ learning_rate = ReduceLROnPlateau(
     monitor='val_loss',
     factor=0.2,
     patience=3,
-    min_delta=0.001,
+    min_delta=0.0001,
     verbose=1
 )
 
@@ -55,15 +55,15 @@ if TRAIN:
         validation_data=test_generators,
         callbacks=[
             early_stopping,
-            # learning_rate
+            learning_rate
         ]
     )
 
 if SAVE:
     # Save Model in a h5 format
     if os.path.isfile(
-            '/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python//Model.h5'
+            '/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python//Model1.h5'
     ) is False:
         model.save(
-            '/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python//Model.h5'
+            '/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python//Model1.h5'
         )
