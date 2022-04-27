@@ -62,8 +62,8 @@ if TRAIN:
 if SAVE:
     # Save Model in a h5 format
     if os.path.isfile(
-            '/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python//Model1.h5'
+            '/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python//Model.h5'
     ) is False:
         model.save(
-            '/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python//Model1.h5'
+            '/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python//Model.h5'
         )
