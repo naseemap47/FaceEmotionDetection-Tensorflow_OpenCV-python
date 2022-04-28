@@ -1,28 +1,37 @@
 from keras import layers
 from keras import Model
-import tensorflow as tf
-
-# Pre-Trained Model (mobilenetv2_1.00_224)
-model = tf.keras.applications.MobileNetV2()
-# model.summary()
 
 
 def deeplearning_model(no_class):
-    # Input Size = 224 x 224 (pre-Trained model)
-    my_input = model.layers[0].input
+    my_input = layers.Input(shape=(256, 256, 3))
 
-    # pre-trained model
-    # Removing last layer in pre-trained model (it's for 1000 classes)
-    # Changes to 7 classes (Our Need)
-    output = model.layers[-2].output
+    # Layer 1
+    x = layers.Conv2D(16, kernel_size=(3, 3), activation='relu')(my_input)
+    x = layers.MaxPool2D()(x)
+    x = layers.Dropout(0.2)(x)
 
-    x = layers.Dense(128)(output)
-    x = layers.Activation('relu')(x)
-    x = layers.Dense(64)(x)
-    x = layers.Activation('relu')(x)
+    # Layer 2
+    x = layers.Conv2D(32, kernel_size=(3, 3), activation='relu')(my_input)
+    x = layers.MaxPool2D()(x)
+    x = layers.Dropout(0.2)(x)
+
+    # Layer 3
+    x = layers.Conv2D(64, kernel_size=(3, 3), activation='relu')(my_input)
+    x = layers.MaxPool2D()(x)
+    x = layers.Dropout(0.2)(x)
+
+    # Layer 4
+    x = layers.Conv2D(128, kernel_size=(3, 3), activation='relu')(my_input)
+    x = layers.MaxPool2D()(x)
+    x = layers.Dropout(0.2)(x)
+
+    x = layers.Flatten()(x)
+    x = layers.Dense(256)(x)
+    x = layers.Dropout(0.2)(x)
+    x = layers.Dense(128)(x)
     x = layers.Dense(no_class, activation='softmax')(x)
 
     return Model(inputs=my_input, outputs=x)
 
-# new_model = deeplearning_model(7)
-# new_model.summary()
+new_model = deeplearning_model(7)
+new_model.summary()
