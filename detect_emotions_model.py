@@ -20,7 +20,7 @@ if Sample:
     sample_images(train_img_path)
 
 if RESIZE:
-    resize_images(244,
+    resize_images(224,
                   path_data='/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python/images'
                   )
 
