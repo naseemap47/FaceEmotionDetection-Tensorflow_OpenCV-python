@@ -18,14 +18,14 @@ cap = cv2.VideoCapture(0)
 
 while True:
     success, img = cap.read()
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    faces = face_classifier.detectMultiScale(gray)
+    img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    faces = face_classifier.detectMultiScale(img_rgb)
     # print(faces)
 
     for (x, y, w, h) in faces:
         cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
-        face_roi = gray[y:y + h, x:x + w]
-        face_roi = cv2.resize(face_roi, (48, 48), interpolation=cv2.INTER_AREA)
+        face_roi = img_rgb[y:y + h, x:x + w]
+        face_roi = cv2.resize(face_roi, (224, 224), interpolation=cv2.INTER_AREA)
         # print(len(face_roi))
 
         if len(face_roi) != 0:
