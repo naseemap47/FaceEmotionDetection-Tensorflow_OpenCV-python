@@ -9,9 +9,9 @@ from my_utils import resize_images
 ################
 # Switches
 Sample = False
-RESIZE = True
-TRAIN = False
-SAVE = False
+RESIZE = False
+TRAIN = True
+SAVE = True
 ################
 
 
@@ -20,9 +20,10 @@ if Sample:
     sample_images(train_img_path)
 
 if RESIZE:
-    resize_images(224,
-                  path_data='/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python/images'
-                  )
+    resize_images(
+        to_size=224,
+        path_data='/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python/images'
+    )
 
 train_generators, test_generators = create_generators(
     batch_size=32,
