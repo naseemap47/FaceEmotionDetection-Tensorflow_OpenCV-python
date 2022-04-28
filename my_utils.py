@@ -1,3 +1,4 @@
+import cv2
 import matplotlib.pyplot as plt
 from keras.preprocessing.image import load_img
 from keras.preprocessing.image import ImageDataGenerator
@@ -43,3 +44,18 @@ def create_generators(batch_size, path_to_train_data, path_to_val_data):
         shuffle=False
     )
     return train_generators, val_generators
+
+
+def resize_images(to_size, path_data):
+    files = os.listdir(path_data)
+    for file in files:
+        path = os.path.join(path_data, file)
+        category = os.listdir(path)
+        for cat in category:
+            path_cat = os.path.join(path, cat)
+            images = os.listdir(path_cat)
+            for img in images:
+                path_img = os.path.join(path_cat, img)
+                img_array = cv2.imread(path_img)
+                new_array = cv2.resize(img_array, (to_size, to_size))
+                cv2.imwrite(os.path.join(path_cat, img), new_array)
