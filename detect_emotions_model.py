@@ -4,18 +4,25 @@ from deeplearning_model import deeplearning_model
 from keras.callbacks import EarlyStopping
 from keras.callbacks import ReduceLROnPlateau
 import os
+from my_utils import resize_images
 
 ################
 # Switches
 Sample = False
-TRAIN = True
-SAVE = True
+RESIZE = True
+TRAIN = False
+SAVE = False
 ################
 
 
 if Sample:
     train_img_path = '/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python/images/train/angry/'
     sample_images(train_img_path)
+
+if RESIZE:
+    resize_images(224,
+                  path_data='/home/naseem/PycharmProjects/FaceEmotionDetection-Tensorflow_OpenCV-python/images'
+                  )
 
 train_generators, test_generators = create_generators(
     batch_size=32,
