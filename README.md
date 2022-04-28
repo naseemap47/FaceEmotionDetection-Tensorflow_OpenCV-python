@@ -30,6 +30,26 @@
 ## Description
 Predict your emotions from Webcam using Tensorflow and OpenCV in python.
 
+## ⚠️ Limitations
+#### 1st Model
+* **Model = 3-CNN layer + One Fully Connected Layer**
+* Early Stopping at **36th** Epoch
+* I got **54.95%** Accuracy, Val_accuracy = **52.75%**
+#### 2nd Model
+* **Model = 4-CNN layer + One Fully Connected Layer**
+* For My system it's take **22 hr** to Complete the Processes (Early Stopping at **41th** Epoch)
+* I got **68.59%** Accuracy, Val_accuracy = **66.28%**
+#### 3rd Model
+* Only **70.42%** Accuracy,  Val_accuracy = **63.40%**
+* Trained using pre-trained model (**mobilenetv2_1.00_224**)
+* For My system it's take **3.1 hr** to Complete the Training (Early Stopping at **30th** Epoch)
+
+
+## 💡 Suggestions
+* Train in system having **GPU** (Graphics Card)
+   * eg:- Nvidia RTX 1080 
+* Increase depth of neural networks
+
 ## Requirements
 #### Programming Language
 * Python3 (pyCharm)
