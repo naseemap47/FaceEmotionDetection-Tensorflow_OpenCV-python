@@ -29,16 +29,16 @@ def create_generators(batch_size, path_to_train_data, path_to_val_data):
     val_preprocessor = ImageDataGenerator()
     train_generators = train_preprocessor.flow_from_directory(
         path_to_train_data,
-        target_size=(48, 48),
-        color_mode='rgb',
+        target_size=(256, 256),
+        color_mode='grayscale',
         class_mode='categorical',
         batch_size=batch_size,
         shuffle=True
     )
     val_generators = val_preprocessor.flow_from_directory(
         path_to_val_data,
-        target_size=(48, 48),
-        color_mode='rgb',
+        target_size=(256, 256),
+        color_mode='grayscale',
         class_mode='categorical',
         batch_size=batch_size,
         shuffle=False
