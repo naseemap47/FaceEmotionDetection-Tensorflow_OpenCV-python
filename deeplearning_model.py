@@ -3,7 +3,7 @@ from keras import Model
 
 
 def deeplearning_model(no_class):
-    my_input = layers.Input(shape=(256, 256, 3))
+    my_input = layers.Input(shape=(256, 256, 1))
 
     # Layer 1
     x = layers.Conv2D(16, (3, 3), activation='relu')(my_input)
